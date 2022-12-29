@@ -10,7 +10,7 @@ function sum(a, b) { // a와 b는 매개변수(Parameters)
 } 
 
 // 재사용! 
-let a = sum(1, 2); // 1과 2는 인수(Arguments) 
+let a = sum(1, 2); // 1과 2는 인수(Arguments => 곧 데이터) 
 let b = sum(7, 12);
 let c = sum(2, 4);
 
@@ -33,6 +33,7 @@ let world = function () {
 } 
 ```
 * 함수 선언과 함수 표현의 개념에 대해 알아둘것
+- 함수안에 'return undefined' 가 생략이 되어 있음
 * 호이스팅(Hoisting)관련하여 위 개념아 사용됨
 
 ### 함수 호출! 
