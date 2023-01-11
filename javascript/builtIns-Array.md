@@ -16,8 +16,8 @@ console.log(arr.length) // 3
 ### .at()
 
 대상 배열을 인덱싱합니다.  
-음수 값을 사용하면 뒤에서부터 인덱싱합니다.
-
+음수 값을 사용하면 뒤에서부터 인덱싱합니다.  
+`뒤에서 부터 조회할때 유용`
 ```js
 const arr = ['A', 'B', 'C']
 
@@ -29,7 +29,7 @@ console.log(arr.at(-1)) // 'C'
 ```
 
 ### .concat()
-
+`중요`  
 대상 배열과 주어진 배열을 병합해 새로운 배열을 반환합니다.
 
 ```js
@@ -45,17 +45,16 @@ console.log(arr3) // ['A', 'B', 'C', 'D', 'E', 'F']
 
 ### .every()
 
-대상 배열의 모든 요소가 콜백 테스트를 통과(참(Truthy)을 반환)하는지 확인합니다.
+대상 배열의 모든 요소가 `콜백` 테스트를 통과(Truthy)을 반환하는지 확인합니다.  
 콜백: 함수의 인수로 들어가는 함수, 즉 함수
 
 ```js
-const arr1 = [4, 5, 6, 7]
+const arr1 = [1, 2, 3, 4]
 const arr2 = [4, 5, 6, 7]
 
-const isValid1 = arr1.every(item => item < 5)
+const isValid1 = arr1.every(item => item < 5) // 화살표 함수에 중괄호가 없을 경우 리턴 키워드가 없다.
 const isValid2 = arr2.every(item => item < 5)
 
-// 화살표 함수에 중괄호가 없을 경우 리턴 키워드가 없다.
 // 1) 4 => 4 < 5 //통과
 // 2) 5 => 5 < 5 //실패
 // 3) 6 => 6 < 5 //실패
@@ -63,12 +62,23 @@ const isValid2 = arr2.every(item => item < 5)
 
 console.log(isValid1) // true
 console.log(isValid2) // false
+
+const arr = [1,2,3,4]
+const isValid = arr.every(item => {
+  console.log(item)
+  return item < 3
+})
+//1
+//2
+//3 실패하는 경우가 나오면 뒤에 반복 실행을 멈춤
+//false
 ```
 
 ### .filter()
-
-대상 배열에서 콜백 테스트를 통과하는 모든 요소로 새로운 배열을 만들어 반환합니다.  
-만약 모든 요소가 테스트를 통과하지 못하면 빈 배열을 반환합니다.
+`중요`  
+대상 배열에서 콜백 테스트를 `통과하는 모든 요소만 모아서 새로운 배열`을 만들어 반환합니다.  
+만약 모든 요소가 테스트를 통과하지 못하면 빈 배열을 반환합니다.  
+원본 배열에서 개수가 줄어든다.
 
 ```js
 const numbers = [1, 20, 7, 9, 104, 0, 58]
@@ -83,13 +93,18 @@ const users = [
   { name: 'Amy', age: 22 },
   { name: 'Lewis', age: 11 }
 ]
-const adults = users.filter(user => user.age >= 19)
+const adults = users.filter(user => user.age >= 19) // 많이 사용되는 유형
+
+// 1) user => {name: 'Neo', age: 85}.age >= 19
+// 2) user => {name: Amy', age: 22}.age >= 19
+// 3) user => {name: 'Lewis', age: 11}.age >= 19
+
 console.log(adults) // [ Neo객체, Amy객체 ]
 ```
 
 ### .find()
-
-대상 배열에서 콜백 테스트를 통과하는 첫 번째 요소를 반환합니다.  
+`중요`  
+대상 배열에서 `콜백 테스트를 통과하는 첫 번째 요소`를 반환합니다.  
 최초로 테스트가 통과하면, 이후 콜백은 실행되지 않습니다.  
 모든 테스트가 실패하면, `undefined`를 반환합니다.
 
@@ -113,8 +128,8 @@ console.log(foundUser) // { name: 'Amy', age: 22 }
 ```
 
 ### .findIndex()
-
-대상 배열에서 콜백 테스트를 통과하는 첫 번째 요소의 인덱스를 반환합니다.
+`중요`  
+대상 배열에서 `콜백 테스트를 통과하는 첫 번째 요소의 인덱스`를 반환합니다.  
 최초로 테스트가 통과하면, 이후 콜백은 실행되지 않습니다.  
 모든 테스트가 실패하면, `-1`을 반환합니다.
 
@@ -129,8 +144,8 @@ console.log(index) // 2
 
 ### .flat()
 
-대상 배열의 모든 하위 배열을 지정한 깊이(Depth)까지 이어붙인 새로운 배열을 반환합니다.
-깊이의 기본값은 `1`입니다.
+대상 배열의 `모든 하위 배열`을 지정한 깊이(Depth)까지 이어붙인 새로운 배열을 반환합니다.  
+깊이의 기본값은 `1`입니다.  
 
 ```js
 const arr = [1, 2, [3, 4]]
@@ -154,13 +169,13 @@ console.log(arr.flat(Infinity)) // [1, 2, 3, 4, 5, 6, 7, 8]
 ```
 
 ### .forEach()
-
-대상 배열의 길이만큼 주어진 콜백을 실행합니다.
+`굉장히 중요!!!`  
+대상 배열의 길이만큼 주어진 콜백을 실행합니다.  
 
 ```js
 const arr = ['A', 'B', 'C']
 
-arr.forEach(item => console.log(item))
+arr.forEach(item => console.log(item)) //반환값은 undefiend
 
 for (let i = 0; i < arr.length; i += 1) {
   console.log(arr[i])
@@ -172,8 +187,8 @@ for (let i = 0; i < arr.length; i += 1) {
 ```
 
 `.forEach()`는 중간에 반복을 멈출 수 없습니다.  
-반복을 멈출 수 있어야 한다면, `for` 반복문을 사용해야 합니다.
-비동기 실행을 보장하지 않음 그럴때는 for문 사용
+반복을 멈출 수 있어야 한다면, `for` 반복문을 사용해야 합니다. (break 이용하여)  
+forEach()는 비동기코드의 실행을 보장하지 않음  
 
 ```js
 const arr = ['A', 'B', 'C']
@@ -186,6 +201,10 @@ for (let i = 0; i < arr.length; i += 1) {
 }
 // 'A'
 // 'B'
+
+arr.forEach(async item => {
+  await request(item) // forEach는 await 기다려주지않음 (for문은 가능)
+})
 ```
 
 ### .includes()
